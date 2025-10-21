@@ -1,518 +1,448 @@
 import React from "react";
+import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { motion } from "framer-motion";
+import Features from "../components/Features";
+import Statss from "../components/Statss";
 import {
-  Sparkles,
-  Users,
-  Rocket,
-  Layers,
-  Star,
-  CheckCircle2,
-  Trophy,
+  FileText,
+  Bell,
+  PlusCircle,
+  Edit2,
+  Trash2,
+  PieChart,
+  Search,
   ArrowRight,
+  Contact,
 } from "lucide-react";
 
-const Home = () => {
+const Topbar = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-[#0f0c29] text-white overflow-hidden">
-      {/* Navbar */}
-      <Navbar />
+    <header className="flex items-center justify-between px-6 py-4 bg-white/70 backdrop-blur-md border-b border-gray-100 shadow-sm">
+      <div>
+        <h2 className="text-lg font-semibold text-[#3a0072]">Dashboard Overview</h2>
+        <p className="text-xs text-gray-500 mt-1">
+          Welcome back! Here’s what’s happening today.
+        </p>
+      </div>
 
-      {/* HERO SECTION */}
-      <section className="relative flex flex-col items-center justify-center text-center px-6 py-28 overflow-hidden">
-        <motion.div
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="z-10"
-        >
-          <h1 className="text-5xl sm:text-6xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#7C3AED] to-[#EC4899] drop-shadow-lg">
-            Welcome to <span className="text-white">QuizArena</span>
-          </h1>
-          <p className="text-gray-300 max-w-2xl mx-auto mb-8 text-lg">
-            Learn. Compete. Grow. Join thousands of players in fun, interactive quizzes that test your skills.
-          </p>
-          <button className="bg-gradient-to-r from-[#7C3AED] to-[#EC4899] px-8 py-3 rounded-lg text-white font-semibold shadow-[0_0_20px_#7C3AED] hover:shadow-[0_0_30px_#EC4899] transition-transform hover:scale-105">
-            Get Started
-          </button>
-        </motion.div>
-
-        {/* Animated Background */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#7C3AED]/20 to-[#EC4899]/20 blur-3xl opacity-30"></div>
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute w-96 h-96 rounded-full bg-gradient-to-r from-[#7C3AED] to-[#EC4899] opacity-10 blur-3xl"
-        ></motion.div>
-      </section>
-
-      {/* ABOUT SECTION */}
-      <section className="py-24 px-8 bg-[#1b1838]/70 backdrop-blur-md border-t border-white/10 text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-4xl font-bold mb-10 text-transparent bg-clip-text bg-gradient-to-r from-[#7C3AED] to-[#EC4899]"
-        >
-          Why Choose QuizArena?
-        </motion.h2>
-
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {[
-            {
-              icon: <Sparkles size={36} className="text-pink-400 mx-auto mb-3" />,
-              title: "Interactive Learning",
-              desc: "Engage with smart quizzes designed to make learning fun and effective.",
-            },
-            {
-              icon: <Users size={36} className="text-purple-400 mx-auto mb-3" />,
-              title: "Play with Friends",
-              desc: "Create rooms and challenge your friends in real-time matches.",
-            },
-            {
-              icon: <Rocket size={36} className="text-emerald-400 mx-auto mb-3" />,
-              title: "Climb the Leaderboard",
-              desc: "Earn badges, gain XP, and compete with players worldwide.",
-            },
-          ].map((card, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.2 }}
-              className="bg-white/10 rounded-xl p-6 border border-white/10 hover:scale-105 hover:shadow-[0_0_20px_#7C3AED] transition-transform duration-300"
-            >
-              {card.icon}
-              <h3 className="text-xl font-semibold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-[#7C3AED] to-[#EC4899]">
-                {card.title}
-              </h3>
-              <p className="text-gray-300 text-sm">{card.desc}</p>
-            </motion.div>
-          ))}
+      <div className="flex items-center gap-4">
+        <div className="relative">
+          <input
+            type="text"
+            placeholder="Search quizzes, users..."
+            className="pl-10 pr-4 py-2 rounded-lg border border-gray-200 bg-white text-sm w-72 focus:outline-none focus:ring-2 focus:ring-[#b57edc]/40"
+          />
+          <span className="absolute left-3 top-2.5 text-gray-400">
+            <Search size={16} />
+          </span>
         </div>
-      </section>
 
+        <button className="p-2 rounded-lg bg-white border border-gray-100 shadow-sm hover:bg-gray-50">
+          <Bell size={18} />
+        </button>
 
-
-{/* SLIDING SHOWCASE SECTION */}
-<section className="relative overflow-hidden py-20 border-t border-white/10 bg-[#141227]">
-  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#7C3AED]/10 to-transparent blur-3xl"></div>
-
-  <h2 className="text-center text-3xl font-extrabold mb-10 text-transparent bg-clip-text bg-gradient-to-r from-[#7C3AED] to-[#EC4899]">
-    Explore Trending Quiz Categories
-  </h2>
-
-  {/* Sliding Container */}
-  <div className="flex gap-8 animate-marquee whitespace-nowrap px-6">
-    {[
-      { title: "Science", color: "from-cyan-400 to-blue-500" },
-      { title: "Technology", color: "from-purple-500 to-pink-500" },
-      { title: "History", color: "from-yellow-400 to-orange-500" },
-      { title: "Sports", color: "from-green-400 to-emerald-500" },
-      { title: "Movies", color: "from-red-400 to-pink-500" },
-      { title: "Mathematics", color: "from-blue-400 to-indigo-500" },
-      { title: "Art & Design", color: "from-rose-400 to-fuchsia-500" },
-      { title: "Music", color: "from-purple-400 to-indigo-500" },
-    ].map((item, i) => (
-      <div
-        key={i}
-        className={`relative group min-w-[260px] h-[160px] flex items-center justify-center rounded-2xl shadow-[0_0_25px_rgba(255,255,255,0.05)] bg-gradient-to-br ${item.color} p-[3px]`}
-      >
-        {/* Inner Card */}
-        <div className="relative bg-[#0f0c29] w-full h-full rounded-2xl flex flex-col items-center justify-center text-center transition-all duration-500 group-hover:scale-105 group-hover:shadow-[0_0_25px_#EC4899]">
-          {/* Glow Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl"></div>
-          <h3 className="text-xl font-bold text-white drop-shadow-lg">{item.title}</h3>
-          <p className="text-sm text-gray-300 mt-2">Take the {item.title} Quiz!</p>
+        <div className="flex items-center gap-3">
+          <div className="text-right">
+            <div className="text-sm font-semibold">Admin</div>
+            <div className="text-xs text-gray-500">laiba@example.com</div>
+          </div>
+          <div className="w-10 h-10 bg-gradient-to-br from-[#6A0DAD] to-[#B57EDC] rounded-full flex items-center justify-center text-white font-bold">
+            L
+          </div>
         </div>
       </div>
-    ))}
+    </header>
+  );
+};
+
+const StatCard = ({ label, value }) => (
+  <div className="bg-white rounded-xl p-5 border border-[#efe8ff] shadow-sm hover:shadow-md transition">
+    <div className="text-sm text-gray-500">{label}</div>
+    <div className="mt-3 text-2xl font-extrabold text-[#3a0072]">{value}</div>
   </div>
+);
 
-  
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      {/* HOW IT WORKS */}
-      <section className="py-20 bg-[#1c1b29]/50 text-center px-8 border-t border-white/10">
-        <h2 className="text-3xl font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-[#7C3AED] to-[#EC4899]">
-          How It Works
-        </h2>
-        <div className="max-w-5xl mx-auto grid sm:grid-cols-3 gap-8">
-          {[
-            {
-              icon: <CheckCircle2 className="text-pink-400 mx-auto mb-3" size={38} />,
-              title: "1. Sign Up",
-              desc: "Create your profile and explore quizzes instantly.",
-            },
-            {
-              icon: <Trophy className="text-yellow-400 mx-auto mb-3" size={38} />,
-              title: "2. Join or Host",
-              desc: "Play solo or invite friends to a hosted quiz room.",
-            },
-            {
-              icon: <Star className="text-emerald-400 mx-auto mb-3" size={38} />,
-              title: "3. Win Rewards",
-              desc: "Collect badges and climb the leaderboard weekly!",
-            },
-          ].map((step, i) => (
-            <motion.div
-              key={i}
-              whileHover={{ scale: 1.05 }}
-              className="bg-white/10 rounded-xl p-6 border border-white/10 hover:shadow-[0_0_25px_#7C3AED] transition-all"
-            >
-              {step.icon}
-              <h3 className="text-lg font-semibold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-[#7C3AED] to-[#EC4899]">
-                {step.title}
-              </h3>
-              <p className="text-gray-300 text-sm">{step.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-
-
-
-{/* LATEST NEWS & BLOG */}
-<section className="py-24 bg-[#141227] border-t border-white/10 text-center relative overflow-hidden">
-  <h2 className="text-3xl font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-[#7C3AED] to-[#EC4899]">
-    Latest from QuizArena Blog
-  </h2>
-
-  <div className="flex overflow-x-auto gap-8 px-8 pb-4 snap-x snap-mandatory scrollbar-hide">
-    {[
-      {
-        title: "10 Tips to Boost Your Quiz Score",
-        desc: "Learn how top players improve their accuracy and reaction time.",
-        img: "https://images.unsplash.com/photo-1551836022-4c4c79ecde51?auto=format&fit=crop&w=800&q=80",
-      },
-      {
-        title: "Why Competitive Quizzing is the Future of Learning",
-        desc: "Discover how gamified quizzes are changing the education landscape.",
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJvEOummrFMJgqfxLMGIxDbXYQ4E2144pK8Q&s",
-      },
-      {
-        title: "Inside the Tech Behind QuizArena",
-        desc: "We break down the futuristic tech stack powering real-time multiplayer.",
-        img: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
-      },
-    ].map((post, i) => (
-      <motion.div
-        key={i}
-        whileHover={{ scale: 1.05 }}
-        className="min-w-[320px] sm:min-w-[360px] bg-white/10 rounded-2xl border border-white/10 overflow-hidden shadow-lg snap-center"
-      >
-        <img src={post.img} alt={post.title} className="w-full h-40 object-cover" />
-        <div className="p-6 text-left">
-          <h3 className="text-xl font-semibold mb-2 text-white">{post.title}</h3>
-          <p className="text-gray-300 text-sm mb-4">{post.desc}</p>
-          <button className="text-sm font-semibold text-pink-400 hover:text-purple-400 transition">
-            Read More →
-          </button>
-        </div>
-      </motion.div>
-    ))}
+const ActivityItem = ({ text, time }) => (
+  <div className="py-3 border-b last:border-b-0 border-gray-100">
+    <div className="text-sm text-gray-700">{text}</div>
+    <div className="text-xs text-gray-400 mt-1">{time}</div>
   </div>
-</section>
-
-
-
-
-{/* MEET THE CREATORS */}
-<section className="py-24 bg-[#141227] border-t border-white/10 text-center">
-  <h2 className="text-3xl font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-[#7C3AED] to-[#EC4899]">
-    Meet the Creators
-  </h2>
-
-  <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 max-w-6xl mx-auto">
-    {[
-      {
-        name: "Laiba Rao",
-        role: "Lead Designer",
-        img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80",
-      },
-      {
-        name: "Ali Raza",
-        role: "Frontend Developer",
-        img: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=800&q=80",
-      },
-      {
-        name: "Sara Ahmed",
-        role: "Backend Engineer",
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRIMbgETySSvBeoxFy1ZIW3znvcZNzTKysiQ&s",
-      },
-      {
-        name: "Hamza Malik",
-        role: "Project Manager",
-        img: "https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&w=800&q=80",
-      },
-    ].map((member, i) => (
-      <motion.div
-        key={i}
-        whileHover={{ scale: 1.05 }}
-        className="bg-white/10 rounded-2xl border border-white/10 overflow-hidden hover:shadow-[0_0_25px_#7C3AED] transition-all"
-      >
-        <img src={member.img} alt={member.name} className="w-full h-56 object-cover" />
-        <div className="p-5">
-          <h3 className="text-xl font-bold">{member.name}</h3>
-          <p className="text-pink-400 text-sm">{member.role}</p>
-        </div>
-      </motion.div>
-    ))}
-  </div>
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{/* FAQ SECTION */}
-<section className="py-24 bg-[#1c1b29]/60 border-t border-white/10 text-center">
-  <h2 className="text-3xl font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-[#7C3AED] to-[#EC4899]">
-    Frequently Asked Questions
-  </h2>
-
-  <div className="max-w-3xl mx-auto space-y-4 text-left">
-    {[
-      {
-        q: "Is QuizArena free to play?",
-        a: "Yes! QuizArena offers free access to thousands of quizzes. Premium events are optional.",
-      },
-      {
-        q: "Can I host my own quiz?",
-        a: "Absolutely. You can create and customize your quiz rooms for private or public events.",
-      },
-      {
-        q: "Do I need to register to play?",
-        a: "You can play as a guest, but registering unlocks leaderboards, achievements, and rewards.",
-      },
-      {
-        q: "How can I earn rewards?",
-        a: "By winning matches, completing daily challenges, and participating in tournaments!",
-      },
-    ].map((faq, i) => (
-      <motion.div
-        key={i}
-        whileHover={{ scale: 1.02 }}
-        className="bg-white/10 p-6 rounded-xl border border-white/10 hover:shadow-[0_0_20px_#7C3AED] transition"
-      >
-        <h3 className="font-semibold text-lg mb-2 text-white">{faq.q}</h3>
-        <p className="text-gray-300 text-sm">{faq.a}</p>
-      </motion.div>
-    ))}
-  </div>
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-
-      {/* STATS SECTION */}
-      <section className="py-16 bg-[#141227] text-center border-t border-white/10">
-        <h2 className="text-3xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-[#7C3AED] to-[#EC4899]">
-          QuizArena by the Numbers
-        </h2>
-        <div className="flex flex-wrap justify-center gap-10">
-          {[
-            { number: "50K+", label: "Active Users" },
-            { number: "2M+", label: "Questions Answered" },
-            { number: "5K+", label: "Quiz Rooms" },
-            { number: "98%", label: "User Satisfaction" },
-          ].map((stat, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.2 }}
-              className="bg-white/10 p-6 rounded-2xl border border-white/10 w-40 hover:shadow-[0_0_20px_#7C3AED] transition"
-            >
-              <h3 className="text-3xl font-bold text-pink-400">{stat.number}</h3>
-              <p className="text-gray-300 text-sm mt-1">{stat.label}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* TESTIMONIALS CAROUSEL */}
-      <section className="py-20 bg-[#1b1838]/60 text-center border-t border-white/10">
-        <h2 className="text-3xl font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-[#7C3AED] to-[#EC4899]">
-          What Players Say
-        </h2>
-        <div className="flex overflow-x-auto gap-8 px-6 pb-4 snap-x snap-mandatory scrollbar-hide">
-          {[
-            {
-              name: "Ayesha Khan",
-              quote:
-                "QuizArena makes learning addictive! I love the competition and energy.",
-            },
-            {
-              name: "Ali Raza",
-              quote: "The UI is so smooth and elegant — feels futuristic!",
-            },
-            {
-              name: "Sara Ahmed",
-              quote: "It’s not just a quiz app, it’s a fun learning experience.",
-            },
-          ].map((review, i) => (
-            <motion.div
-              key={i}
-              className="bg-white/10 min-w-[300px] sm:min-w-[350px] p-6 rounded-2xl border border-white/10 shadow-lg snap-center"
-              whileHover={{ scale: 1.05 }}
-            >
-              <p className="italic text-gray-300 mb-4">“{review.quote}”</p>
-              <h4 className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#7C3AED] to-[#EC4899]">
-                — {review.name}
-              </h4>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* CALL TO ACTION */}
-      <section className="relative py-24 text-center border-t border-white/10 overflow-hidden">
-        <motion.div
-          animate={{ scale: [1, 1.05, 1] }}
-          transition={{ duration: 6, repeat: Infinity }}
-          className="absolute inset-0 bg-gradient-to-r from-[#7C3AED]/20 to-[#EC4899]/20 blur-3xl opacity-30"
-        ></motion.div>
-
-        <h2 className="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-[#7C3AED] to-[#EC4899]">
-          Ready to Join the Arena?
-        </h2>
-        <p className="text-gray-300 mb-8 text-lg">
-          Compete, learn, and grow — start your journey today!
-        </p>
-        <button className="bg-gradient-to-r from-[#7C3AED] to-[#EC4899] px-10 py-3 rounded-lg text-white font-semibold shadow-[0_0_25px_#7C3AED] hover:shadow-[0_0_35px_#EC4899] flex items-center justify-center gap-2 mx-auto transition hover:scale-105">
-          Join Now <ArrowRight size={20} />
+);
+
+const QuizRow = ({ quiz }) => (
+  <tr className="hover:bg-gray-50">
+    <td className="px-4 py-3 text-sm">{quiz.id}</td>
+    <td className="px-4 py-3 text-sm font-semibold">{quiz.title}</td>
+    <td className="px-4 py-3 text-sm">{quiz.category}</td>
+    <td className="px-4 py-3 text-sm">{quiz.questions} Qs</td>
+    <td className="px-4 py-3 text-sm">{quiz.players}</td>
+    <td className="px-4 py-3 text-sm">{quiz.status}</td>
+    <td className="px-4 py-3">
+      <div className="flex gap-2">
+        <button className="p-2 rounded-md bg-white border border-gray-100 hover:bg-gray-50">
+          <Edit2 size={14} />
         </button>
-      </section>
+        <button className="p-2 rounded-md bg-white border border-gray-100 text-red-500 hover:bg-gray-50">
+          <Trash2 size={14} />
+        </button>
+      </div>
+    </td>
+  </tr>
+);
 
-      {/* Footer */}
-      <Footer />
+const Home = () => {
+  const stats = [
+    { label: "Total Quizzes", value: "12" },
+    { label: "Total Players", value: "45" },
+    { label: "Active Quizzes", value: "3" },
+    { label: "Pending Reviews", value: "5" },
+  ];
+
+  const activities = [
+    { text: "Player John joined Quiz A", time: "2 hrs ago" },
+    { text: "Quiz B created by Admin", time: "5 hrs ago" },
+    { text: "Player Alice completed Quiz C", time: "1 day ago" },
+    { text: "Quiz D results published", time: "2 days ago" },
+  ];
+
+  const quizzes = [
+    {
+      id: "#Q-001",
+      title: "General Knowledge",
+      category: "General",
+      questions: 20,
+      players: 102,
+      status: "Active",
+    },
+    {
+      id: "#Q-002",
+      title: "World History",
+      category: "History",
+      questions: 15,
+      players: 58,
+      status: "Inactive",
+    },
+    {
+      id: "#Q-003",
+      title: "Science Basics",
+      category: "Science",
+      questions: 25,
+      players: 200,
+      status: "Active",
+    },
+    {
+      id: "#Q-004",
+      title: "Tech Trends",
+      category: "Technology",
+      questions: 18,
+      players: 34,
+      status: "Draft",
+    },
+  ];
+
+  const team = [
+    {
+      name: "Laiba Rao",
+      role: "Lead Designer",
+      avatar:
+        "https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=400&q=80",
+    },
+    {
+      name: "Ali Raza",
+      role: "Frontend Dev",
+      avatar:
+        "https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?auto=format&fit=crop&w=400&q=80",
+    },
+    {
+      name: "Sara Ahmed",
+      role: "Backend Eng",
+      avatar:
+        "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=400&q=80",
+    },
+    {
+      name: "Hamza Malik",
+      role: "Project Manager",
+      avatar:
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80",
+    },
+  ];
+
+  return (
+    <div className="min-h-screen flex flex-col bg-[#f6f6fb]">
+      <Navbar />
+      <Topbar />
+
+      <main className="flex-1 p-6 space-y-8">
+        {/* Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          {stats.map((s, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.08 }}
+            >
+              <StatCard label={s.label} value={s.value} />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Activities and Chart */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2 bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-semibold text-[#3a0072]">Recent Activities</h3>
+              <button className="text-sm px-3 py-2 rounded-md bg-[#6A0DAD] text-white flex items-center gap-2">
+                <PlusCircle size={16} /> New
+              </button>
+            </div>
+
+            <div className="mt-4">
+              {activities.map((a, idx) => (
+                <ActivityItem key={idx} text={a.text} time={a.time} />
+              ))}
+            </div>
+          </div>
+
+          {/* Engagement Chart */}
+          <div className="bg-gradient-to-br from-[#f8f5ff] to-[#efe6ff] rounded-2xl shadow-lg border border-[#d9caff] p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold text-[#3a0072]">Engagement Overview</h3>
+              <span className="text-sm text-gray-500">Last 7 days</span>
+            </div>
+
+            <div className="relative bg-white/80 rounded-xl p-4 border border-[#e0d5f9]">
+              <svg viewBox="0 0 300 120" className="w-full h-32">
+                <defs>
+                  <linearGradient id="purpleGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#7b3ff2" stopOpacity="0.8" />
+                    <stop offset="100%" stopColor="#cbb4ff" stopOpacity="0" />
+                  </linearGradient>
+                </defs>
+
+                <path
+                  d="M0,80 Q50,20 100,60 T200,70 T300,50 L300,120 L0,120 Z"
+                  fill="url(#purpleGradient)"
+                />
+                <path
+                  d="M0,80 Q50,20 100,60 T200,70 T300,50"
+                  fill="none"
+                  stroke="#7b3ff2"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                />
+                <circle cx="50" cy="40" r="4" fill="#7b3ff2" />
+                <circle cx="150" cy="65" r="4" fill="#7b3ff2" />
+                <circle cx="250" cy="55" r="4" fill="#7b3ff2" />
+              </svg>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 mt-6">
+              <div className="bg-white/70 backdrop-blur-sm border border-[#e0d5f9] rounded-lg p-4 text-center">
+                <p className="text-sm text-gray-500">Average Score</p>
+                <p className="text-2xl font-bold text-[#5a00a3]">78%</p>
+                <p className="text-xs text-green-600 mt-1">+5% this week</p>
+              </div>
+              <div className="bg-white/70 backdrop-blur-sm border border-[#e0d5f9] rounded-lg p-4 text-center">
+                <p className="text-sm text-gray-500">Completion Rate</p>
+                <p className="text-2xl font-bold text-[#5a00a3]">65%</p>
+                <p className="text-xs text-red-500 mt-1">-3% this week</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Quizzes Table */}
+        <div className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
+          <div className="flex items-center justify-between">
+            <h3 className="text-lg font-semibold text-[#3a0072]">Quizzes</h3>
+            <div className="flex items-center gap-3">
+              <button className="px-3 py-2 rounded-md border border-gray-200 bg-white text-sm flex items-center gap-2">
+                <FileText size={14} /> Export
+              </button>
+              <button className="px-3 py-2 rounded-md bg-gradient-to-r from-[#6A0DAD] to-[#B57EDC] text-white text-sm flex items-center gap-2">
+                <PlusCircle size={14} /> New Quiz
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-6 overflow-x-auto">
+            <table className="min-w-full text-left">
+              <thead>
+                <tr className="text-xs uppercase text-gray-400 border-b border-gray-100">
+                  <th className="px-4 py-3">ID</th>
+                  <th className="px-4 py-3">Title</th>
+                  <th className="px-4 py-3">Category</th>
+                  <th className="px-4 py-3">Questions</th>
+                  <th className="px-4 py-3">Players</th>
+                  <th className="px-4 py-3">Status</th>
+                  <th className="px-4 py-3">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {quizzes.map((q, idx) => (
+                  <QuizRow quiz={q} key={idx} />
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Team Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="col-span-2 bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-semibold text-[#3a0072]">Meet the Creators</h3>
+              <div className="text-sm text-gray-400">Core Team</div>
+            </div>
+
+            <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-4">
+              {team.map((m, i) => (
+                <div
+                  key={i}
+                  className="bg-white/95 rounded-lg p-4 border border-gray-50 text-center shadow-sm"
+                >
+                  <img
+                    src={m.avatar}
+                    alt={m.name}
+                    className="mx-auto w-16 h-16 rounded-full object-cover border border-gray-200 shadow-sm"
+                  />
+                  <div className="mt-3 text-sm font-medium text-[#4a007a]">
+                    {m.name}
+                  </div>
+                  <div className="text-xs text-gray-500">{m.role}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
+            <h3 className="text-lg font-semibold text-[#3a0072]">What Players Say</h3>
+            <div className="mt-4 space-y-3">
+              <p className="text-sm text-gray-700 italic">
+                “QuizArena makes learning addictive!” — Ayesha
+              </p>
+              <p className="text-sm text-gray-700 italic">
+                “The UI is smooth and elegant.” — Ali
+              </p>
+              <p className="text-sm text-gray-700 italic">
+                “Fun learning experience.” — Sara
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA */}
+        <div className="bg-gradient-to-r from-[#faf5ff] to-[#f3ecff] p-6 rounded-xl border border-[#efe8ff] flex items-center justify-between">
+          <div>
+            <h3 className="text-lg font-bold text-[#3a0072]">
+              Ready to create your next quiz?
+            </h3>
+            <p className="text-sm text-gray-600 mt-1">
+              Invite players, schedule events, and publish results effortlessly.
+            </p>
+          </div>
+          <div className="flex items-center gap-3">
+            <button className="px-4 py-2 rounded-md border border-gray-200 bg-white">
+              Maybe later
+            </button>
+            <button className="px-4 py-2 rounded-md bg-gradient-to-r from-[#6A0DAD] to-[#B57EDC] text-white flex items-center gap-2">
+              Create Quiz <ArrowRight size={16} />
+            </button>
+          </div>
+        </div>
+
+
+
+<Statss/>
+
+<Features/>
+
+{/* 🌟 ABOUT SECTION */}
+<section className="bg-gradient-to-b from-[#faf5ff] to-[#f3ecff] rounded-xl border border-[#efe8ff] p-8 shadow-sm">
+  <div className="text-center max-w-3xl mx-auto">
+    <h2 className="text-2xl font-bold text-[#3a0072] mb-3">About QuizArena</h2>
+    <p className="text-gray-600 text-sm leading-relaxed">
+      QuizArena is your modern hub for interactive learning. Whether you're a student,
+      teacher, or enthusiast — create, play, and analyze quizzes that make learning fun
+      and rewarding. We blend innovation with education through engaging design and
+      real-time analytics.
+    </p>
+  </div>
+
+  <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-8 text-center">
+    <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
+      <h3 className="text-[#6A0DAD] font-semibold mb-2">💡 Smart Learning</h3>
+      <p className="text-sm text-gray-600">
+        Experience personalized quizzes that adapt to your performance.
+      </p>
+    </div>
+    <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
+      <h3 className="text-[#6A0DAD] font-semibold mb-2">⚙️ Powerful Tools</h3>
+      <p className="text-sm text-gray-600">
+        Create, manage, and review quizzes with ease using our intuitive interface.
+      </p>
+    </div>
+    <div className="p-4 bg-white rounded-xl border border-gray-100 shadow-sm">
+      <h3 className="text-[#6A0DAD] font-semibold mb-2">🌍 Global Access</h3>
+      <p className="text-sm text-gray-600">
+        Join learners worldwide and compete in public or private quiz challenges.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <Footer />
+      </main>
     </div>
   );
 };
 
 export default Home;
+
+
+
+
+
+
+
+
+
