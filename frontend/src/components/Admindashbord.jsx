@@ -38,7 +38,7 @@ const AdminDashboard = () => {
 </Link>
 
 
-<Link to="/NotificationManager" className="w-full">
+<Link to="/NotificationsManager" className="w-full">
   <button className="flex items-center gap-2 p-2 rounded-lg hover:bg-purple-700 w-full text-white transition">
     <FileText size={20} /> Notification Manager
   </button>

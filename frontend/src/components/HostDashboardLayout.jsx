@@ -1,5 +1,7 @@
 
 import React from "react";
+
+import QuizResults from "./QuizResults";
 import { Link, useLocation } from "react-router-dom";
 import {
   PlusCircle,
@@ -15,21 +17,21 @@ import {
   User,
 } from "lucide-react";
 
+
 const sidebarItems = [
   { title: "Create Quiz", icon: <PlusCircle />, path: "/CreateQuiz" },
   { title: "Manage Questions", icon: <List />, path: "/QuestionManager" },
   { title: "Create Quiz Room", icon: <PlayCircle />, path: "/CreateQuizRoom" },
-  
   { title: "Leaderboard Management", icon: <Award />, path: "/LeaderboardManagement" },
   { title: "Live Quiz Analytics", icon: <BarChart2 />, path: "/LiveQuizAnalytics" },
   { title: "Quiz Template Manager", icon: <FileText />, path: "/QuizTemplateManager" },
   { title: "Invite Participants", icon: <Users />, path: "/InviteParticipants" },
   { title: "Quiz Results", icon: <BarChart2 />, path: "/QuizResults" },
-  { title: "Notifications Manager", icon: <Bell />, path: "/NotificationsManager" },
-  { title: "Host Profile", icon: <User />, path: "/HostProfile" },
+  { title: "Notification Manager", icon: <Bell />, path: "/HostNotificationManager" },
   { title: "Reports Dashboard", icon: <BarChart2 />, path: "/ReportsDashboard" },
-  { title: "Question Bank", icon: <List />, path: "/QuestionBank" },
-  { title: "Quiz Archiver", icon: <Archive />, path: "/QuizArchiver" },
+  { title: "Host Profile", icon: <User />, path: "/HostProfile" },
+  
+
 ];
 
 const HostDashboardLayout = ({ children }) => {
@@ -65,7 +67,7 @@ const HostDashboardLayout = ({ children }) => {
           })}
         </nav>
       </aside>
-
+      
       {/* Main Content */}
       <main className="flex-1 p-8 bg-gray-50">
         <header className="mb-8">
@@ -74,7 +76,7 @@ const HostDashboardLayout = ({ children }) => {
             Manage all your quizzes, questions, and live sessions from one place.
           </p>
         </header>
-
+ <QuizResults />
         {/* Render selected component/page */}
         <div>{children}</div>
       </main>

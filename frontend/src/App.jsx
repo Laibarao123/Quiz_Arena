@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import NotificationManager from "./components/NotificationsManager";
+import NotificationsManager from "./components/NotificationsManager";
 import Home from "./pages/Home";
 import Auth from "./pages/Auth";  
 import Host from "./pages/Host";
@@ -36,7 +36,14 @@ import AnnouncementManager from "./components/AnnouncementManager";
 import HostDashboardLayout from "./components/HostDashboardLayout";
 import CreateQuizRoom from "./components/CreateQuizRoom";
 import QuizHistoryPlayer from "./components/QuizHistoryPlayer";
+import QuizTemplateManager from "./components/QuizTemplateManager";
+import LiveQuizAnalytics from "./components/LiveQuizAnalytics";
+import InviteParticipants from "./components/InviteParticipants";
+import QuizResults from "./components/QuizResults";
+import HostNotificationManager from "./components/HostNotificationManager";
+import HostProfile from "./components/HostProfile";
 import ProfileCustomization from "./components/ProfileCustomization";
+import ReportsDashboard from "./components/ReportsDashboard";
 import LeaderboardManagement from "./components/LeaderboardManagement";
 
 const App = () => {
@@ -50,11 +57,13 @@ const App = () => {
       <Route path="/leaderboardManagement" element={<LeaderboardManagement/>} />
       <Route path="/quizHistoryPlayer" element={<QuizHistoryPlayer/>} />
       <Route path="/profileCustomization" element={<ProfileCustomization/>} />
-
-
+      <Route path="/inviteParticipants" element={<InviteParticipants/>} />
+      <Route path="/quizResults" element={<QuizResults/>} />
+      <Route path="/reportsDashboard" element={<ReportsDashboard/>} />
+      <Route path="/hostProfile" element={<HostProfile/>} />
       <Route path="/announcementManager" element={<AnnouncementManager/>} />
-
-
+       <Route path="/quizTemplateManager" element={<QuizTemplateManager/>} />
+      <Route path="/liveQuizAnalytics" element={<LiveQuizAnalytics/>} />
       <Route path="/achievements" element={<Achievements/>} />
 
       <Route path="/leaderboard" element={<Leaderboard/>} />
@@ -72,11 +81,11 @@ const App = () => {
       
       <Route path="/feedbackCenter" element={<FeedbackCenter/>} />
 
-
+      <Route path="/hostNotificationManager" element={<HostNotificationManager/>} />
       
       
       
-      <Route path="/notificationManager" element={<NotificationManager/>} />
+      <Route path="/notificationsManager" element={<NotificationsManager/>} />
       
       <Route path="/activityLogs" element={<ActivityLogs/>} />
       
@@ -99,9 +108,11 @@ const App = () => {
       
       <Route path="/admindashbord" element={<Admindashbord/>} />
 
+<Route path="/QuizRoomPlayerView/:quizId" element={<QuizRoomPlayerView />} />
+
+      {/* <Route path="/quizRoomPlayerView" element={<QuizRoomPlayerView />} /> */}
 
 
-      <Route path="/quizRoomPlayerView" element={<QuizRoomPlayerView />} />
       <Route path="/forgetpass" element={<Forgetpass/>} />
       {/* <Route path="/register" element={<Register/>} /> */}
       

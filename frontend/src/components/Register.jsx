@@ -51,8 +51,20 @@
 //       return;
 //     }
 
-//     // Get existing users from localStorage
-//     const users = JSON.parse(localStorage.getItem("users")) || [];
+//     // Get existing users from localStorage safely
+//     let users = [];
+//     try {
+//       const storedUsers = JSON.parse(localStorage.getItem("users"));
+//       if (Array.isArray(storedUsers)) {
+//         users = storedUsers;
+//       } else {
+//         // Clear invalid data
+//         localStorage.removeItem("users");
+//       }
+//     } catch (error) {
+//       localStorage.removeItem("users");
+//       users = [];
+//     }
 
 //     // Check if email already exists
 //     const userExists = users.some(
@@ -169,9 +181,12 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"; // ✅ Import Axios
 
 const Register = () => {
   const navigate = useNavigate();
+
+  // Form state
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -179,21 +194,22 @@ const Register = () => {
     confirmPassword: "",
   });
 
+  // Message state (success/error)
   const [message, setMessage] = useState({ type: "", text: "" });
 
-  // Handle input changes
+  // Handle input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle registration
-  const handleSubmit = (e) => {
+  // Handle form submission
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage({ type: "", text: "" });
 
     const { name, email, password, confirmPassword } = formData;
 
-    // Basic validation
+    // ✅ Basic validation (frontend)
     if (!name || !email || !password || !confirmPassword) {
       setMessage({ type: "error", text: "All fields are required!" });
       return;
@@ -201,7 +217,7 @@ const Register = () => {
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      setMessage({ type: "error", text: "Please enter a valid email address!" });
+      setMessage({ type: "error", text: "Please enter a valid email!" });
       return;
     }
 
@@ -218,48 +234,35 @@ const Register = () => {
       return;
     }
 
-    // Get existing users from localStorage safely
-    let users = [];
     try {
-      const storedUsers = JSON.parse(localStorage.getItem("users"));
-      if (Array.isArray(storedUsers)) {
-        users = storedUsers;
+      // ✅ Send registration data to backend
+      const response = await axios.post("http://localhost:4000/api/auth/register", {
+        name,
+        email,
+        password,
+        confirmPassword,
+      });
+
+      if (response.data.success) {
+        setMessage({ type: "success", text: "Registration successful! Redirecting..." });
+
+        // Optional: store token if needed
+        localStorage.setItem("token", response.data.token);
+
+        // Clear form
+        setFormData({ name: "", email: "", password: "", confirmPassword: "" });
+
+        // Redirect to login after a short delay
+        setTimeout(() => navigate("/login"), 2000);
       } else {
-        // Clear invalid data
-        localStorage.removeItem("users");
+        setMessage({ type: "error", text: response.data.message });
       }
     } catch (error) {
-      localStorage.removeItem("users");
-      users = [];
+      console.error("Registration error:", error);
+      const errorMsg =
+        error.response?.data?.message || "Server error. Please try again.";
+      setMessage({ type: "error", text: errorMsg });
     }
-
-    // Check if email already exists
-    const userExists = users.some(
-      (user) => user.email.toLowerCase() === email.trim().toLowerCase()
-    );
-
-    if (userExists) {
-      setMessage({ type: "error", text: "A user with this email already exists!" });
-      return;
-    }
-
-    // Create new user
-    const newUser = {
-      name: name.trim(),
-      email: email.trim().toLowerCase(),
-      password,
-    };
-
-    // Save to localStorage
-    users.push(newUser);
-    localStorage.setItem("users", JSON.stringify(users));
-
-    // Success message
-    setMessage({ type: "success", text: "Registration successful! Redirecting..." });
-    setFormData({ name: "", email: "", password: "", confirmPassword: "" });
-
-    // Redirect after delay
-    setTimeout(() => navigate("/login"), 2000);
   };
 
   return (
@@ -272,7 +275,7 @@ const Register = () => {
           Join QuizArena and start competing!
         </p>
 
-        {/* Error or Success message */}
+        {/* ✅ Error or success message */}
         {message.text && (
           <p
             className={`p-2 rounded mb-3 ${
